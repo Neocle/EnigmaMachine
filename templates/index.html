@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Machine M3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="enigma">
+        <h1>Enigma M3</h1>
+        <div class="rotor-container">
+            <div class="rotor">
+                <div class="label">A</div>
+                <div class="screw top"></div>
+                <div class="screw bottom"></div>
+            </div>
+            <div class="rotor">
+                <div class="label">A</div>
+                <div class="screw top"></div>
+                <div class="screw bottom"></div>
+            </div>
+            <div class="rotor">
+                <div class="label">A</div>
+                <div class="screw top"></div>
+                <div class="screw bottom"></div>
+            </div>
+        </div>
+        <div class="lampboard"></div>
+        <div class="separator"></div>
+        <div class="keyboard"></div>
+        <div class="separator"></div>
+        <div class="plugboard"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

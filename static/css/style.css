@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+
+/* General Styling */
+body {
+    background-color: #1a1a1a;
+    color: #A1662F;
+    font-family: 'Roboto Condensed', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    overflow: auto;
+}
+
+/* Enigma Machine Container */
+.enigma {
+    width: 650px;
+    background-image: url('../images/enigma_bg.jpeg');
+    border: 5px solid #A1662F;
+    border-radius: 15px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5), 
+                inset 3px 3px 10px rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Rotors */
+.rotor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.rotor {
+    position: relative;
+    width: 60px;
+    height: 120px;
+    background: #ddd;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.rotor::after {
+    content: '';
+    border-radius: 30px;
+    position: absolute;
+    width: 8px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        #666 0%,
+        #777 8%,
+        #999 12%,
+        white 18%, 
+        #999 22%,
+        #777 30%
+    );
+    
+    top: 0;
+    left: 65px;
+}
+
+.rotor::before {
+    left: -8px;
+}
+
+.rotor::after {
+    right: -8px;
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #c1b18c;
+    border: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.screw {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #bbb;
+    border: 1px solid #888;
+    border-radius: 50%;
+}
+
+.screw.top {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.screw.bottom {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.separator {
+    position: relative;
+    width: 650px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 8px;
+    background: #000;
+    filter: blur(6px);
+}
+
+/* Lampboard and Keyboard */
+.lampboard, .keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.plugboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Ensure rows are centered */
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Spacers to create staggered effect */
+.spacer {
+    width: 50px;
+}
+
+/* Key and Lamp styling */
+.key {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #A1662F;
+    background: linear-gradient(145deg, #333, #222);
+    color: #A1662F;
+    text-align: center;
+    text-justify: center;
+    line-height: 45px;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.lamp {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #333, #222);
+    color: #ddd;
+    text-align: center;
+    line-height: 45px;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.plug-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 8px;
+}
+
+.plug-label {
+    font-size: 12px;
+    color: #ddd;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.plug {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: linear-gradient(145deg, #333, #222);
+    color: #ddd;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.key:hover {
+    color: #814E23;
+    border: 2px solid #814E23;
+}
+
+.key:active {
+    width: 40px;
+    height: 40px;
+    color: #814E23;
+    border: 5px solid #814E23;
+}
+
+.key.active {
+    width: 40px;
+    height: 40px;
+    color: #814E23;
+    border: 5px solid #814E23;
+}
+
+
+.lamp.active {
+    color: #fff;
+    background: #fff;
+    box-shadow: 0 0 20px #fff;
+}
