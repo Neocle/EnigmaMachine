@@ -66,14 +66,60 @@ document.addEventListener("keydown", (event) => {
         setTimeout(() => keyElement.classList.remove("active"), 500);
     }
 });
+
+function applySettings() {
+    const rotor1 = document.getElementById("rotor1").value;
+    const rotor2 = document.getElementById("rotor2").value;
+    const rotor3 = document.getElementById("rotor3").value;
+
+    const start1 = document.getElementById("start1").value.toUpperCase() || "A";
+    const start2 = document.getElementById("start2").value.toUpperCase() || "A";
+    const start3 = document.getElementById("start3").value.toUpperCase() || "A";
+
+    const reflector = document.getElementById("reflector").value;
+    
+    if (!/^[A-Z]$/.test(start1) || !/^[A-Z]$/.test(start2) || !/^[A-Z]$/.test(start3)) {
+        alert("Rotor positions must be a single letter (A-Z)!");
+        return;
+    }
+
+    document.getElementById("rotor1-label").textContent = start1;
+    document.getElementById("rotor2-label").textContent = start2;
+    document.getElementById("rotor3-label").textContent = start3;
+
+    fetch('/set_enigma', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            rotor1, start1,
+            rotor2, start2,
+            rotor3, start3,
+            reflector
+        })
+    }).then(response => response.json()).then(data => {
+        console.log("Settings saved:", data);
+    }).catch(error => console.error("Error:", error));
+}
+
 function pressKey(letter) {
     document.querySelectorAll(".lamp").forEach(lamp => lamp.classList.remove("active"));
-    const lamp = document.getElementById(`L-${letter}`);
-    if (lamp) {
-        lamp.classList.add("active");
-        setTimeout(() => {
-            lamp.classList.remove("active");
-        }, 500);
-    }
+
+    fetch("/decrypt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ letter })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.decrypted) {
+            const lamp = document.getElementById(`L-${data.decrypted}`);
+            if (lamp) {
+                lamp.classList.add("active");
+                setTimeout(() => lamp.classList.remove("active"), 500);
+            }
+        }
+    })
+    .catch(error => console.error("Error:", error));
 }
+
 

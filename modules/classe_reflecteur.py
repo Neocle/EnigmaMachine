@@ -31,8 +31,8 @@ class Reflecteur:
                 - reflecteur à renvoie [17, 3, 14, 1, 9, 13, 19, 10, 21, 4, 7, 12, 11, 5, 2, 22, 25, 0, 23, 6, 24, 8, 15, 18, 20, 16]
                 - id à "UKW-C"
         """
-        self.reflecteur = REFLECTEURS[numero -1]["lettres"]
-        self.id = REFLECTEURS[numero - 1]["id"]
+        self.reflecteur = REFLECTEURS[int(numero) -1]["lettres"]
+        self.id = REFLECTEURS[int(numero) - 1]["id"]
 
     def Get_num_reflecteur(self):
         """
@@ -70,8 +70,4 @@ if __name__ == "__main__":
     mon_reflecteur = Reflecteur(2)    
     print(mon_reflecteur.reflecteur)
     print(mon_reflecteur.id)
-    print(mon_reflecteur.passage_dans_reflecteur(8))
-
-    
-    
-    
+    print(mon_reflecteur.passage_dans_reflecteur(16))

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 
-/* General Styling */
 body {
     background-color: #1a1a1a;
     color: #A1662F;
@@ -8,11 +7,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120vh;
-    overflow: auto;
 }
 
-/* Enigma Machine Container */
+h1 {
+    text-align: center;
+}
+
 .enigma {
     width: 650px;
     background-image: url('../images/enigma_bg.jpeg');
@@ -22,9 +22,78 @@ body {
                 inset 3px 3px 10px rgba(255, 255, 255, 0.1);
     padding: 20px;
     text-align: center;
+    overflow: auto;
 }
 
-/* Rotors */
+.settings-panel {
+    background-image: url('../images/enigma_bg.jpeg');
+    border: 5px solid #A1662F;
+    margin: 10px;
+    margin-bottom: 0px;
+    padding: 50px;
+    padding-top: 0px;
+    width: 300px;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.apply-settings {
+    width: 400px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a1a1a;
+    background: #A1662F;
+    border: 2px solid #A1662F;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    color: #A1662F;
+    background: #1a1a1a;
+    border: 2px solid #A1662F;
+    border-radius: 3px;
+    outline: none;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+select:hover {
+    border-color: #814E23;
+}
+
+select:focus {
+    box-shadow: 0 0 5px #A1662F;
+}
+
+.apply-settings:hover {
+    background: #814E23;
+    border-color: #814E23;
+}
+
+.apply-settings:active {
+    transform: scale(0.95);
+}
+
+.settings-group {
+    margin-bottom: 10px;
+}
+
+.settings-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #A1662F;
+}
+
 .rotor-container {
     display: flex;
     justify-content: center;
@@ -121,7 +190,6 @@ body {
     filter: blur(6px);
 }
 
-/* Lampboard and Keyboard */
 .lampboard, .keyboard {
     display: flex;
     flex-direction: column;
@@ -138,19 +206,16 @@ body {
     margin-top: 20px;
 }
 
-/* Ensure rows are centered */
 .row {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-/* Spacers to create staggered effect */
 .spacer {
     width: 50px;
 }
 
-/* Key and Lamp styling */
 .key {
     width: 45px;
     height: 45px;
@@ -218,23 +283,48 @@ body {
     border: 2px solid #814E23;
 }
 
-.key:active {
-    width: 40px;
-    height: 40px;
+.key:active, .key.active {
+    transform: scale(0.9);
     color: #814E23;
-    border: 5px solid #814E23;
 }
-
-.key.active {
-    width: 40px;
-    height: 40px;
-    color: #814E23;
-    border: 5px solid #814E23;
-}
-
 
 .lamp.active {
     color: #fff;
     background: #fff;
     box-shadow: 0 0 20px #fff;
+}
+
+.decryption-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.fast-decryption, .decryption-details {
+    background-image: url('../images/enigma_bg.jpeg');
+    border: 5px solid #A1662F;
+    margin: 20px;
+    padding: 50px;
+    padding-top: 0px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 40px;
+    color: #A1662F;
+}
+
+.fast-decryption input, .decryption-details input {
+    width: 100%;
+    height: 100px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
 }

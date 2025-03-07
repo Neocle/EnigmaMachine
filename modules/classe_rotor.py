@@ -41,9 +41,9 @@ class Rotor:
                 - id à "III"
                 - encoche à 21
         """
-        self.id = ROTORS[numero - 1]["id"]
-        self.rotor = [ALPHABET.index(c) for c in ROTORS[numero - 1]['lettres']]
-        self.encoche = ALPHABET.index(ROTORS[numero - 1]['encoche'])
+        self.id = ROTORS[int(numero) - 1]["id"]
+        self.rotor = ROTORS[int(numero) - 1]['lettres']
+        self.encoche = ALPHABET.index(ROTORS[int(numero) - 1]['encoche'])
         
     def Get_num_rotor(self) :
         """
@@ -76,7 +76,7 @@ class Rotor:
         
         """
         self.poscur = (self.poscur + 1) % 26
-        self.rotor = self.rotor[1:] + [self.rotor[0]]
+        self.rotor = self.rotor[1:] + self.rotor[0]
 
     def pos_init_rotor(self, pos):
         """
@@ -90,9 +90,9 @@ class Rotor:
                   change la liste rotor en la suivante [7, 9, 11, 2, 15, 17, 19, 23, 21, 25, 13, 24, 4, 8, 22, 6, 0, 10, 12, 20, 18, 14, 1, 3, 5]
         
         """
-        self.poscur = (self.poscur + pos) % 26
-        print("poscur:" ,self.poscur)
-        self.rotor = self.rotor[pos:] + self.rotor[:pos]
+        for i in range(pos):
+            self.decalage_un_rang()
+
         
     def passage_dans_rotor(self, valeur):
         """
@@ -106,11 +106,10 @@ class Rotor:
                   renvoie 'H', 7
         
         """
-        index_corrige = (valeur + self.poscur) % 26 
-        lettre_codee = ALPHABET[self.rotor[index_corrige]]
-        nouvelle_valeur = (ALPHABET.index(lettre_codee) - self.poscur) % 26
-
-        return lettre_codee, nouvelle_valeur
+        valeur = valeur % 26
+        lettre = self.rotor[valeur]
+        indice = ALPHABET.index(lettre) % 26
+        return lettre, indice
         
     def passage_inverse_dans_rotor(self, valeur):
         """
@@ -124,17 +123,16 @@ class Rotor:
                   renvoie 'L', 5
         
         """ 
-        index_corrige = (valeur + self.poscur) % 26
-        nouvelle_position = self.rotor.index(index_corrige)  
-        nouvelle_valeur = (nouvelle_position - self.poscur) % 26
-
-        return ALPHABET[nouvelle_valeur], nouvelle_valeur
-    
+        valeur = valeur % 26
+        lettre = ALPHABET[valeur]
+        indice = self.rotor.index(lettre) % 26
+        return lettre, indice
 
 if __name__ == "__main__":
     mon_rotor = Rotor(3)    
     print(mon_rotor.rotor)
     print(mon_rotor.id)
     print(mon_rotor.encoche)
-    print(mon_rotor.passage_dans_rotor(3)) # chiffrage de la lettre D
+    print(mon_rotor.poscur)
+    print(mon_rotor.passage_dans_rotor(8)) # chiffrage de la lettre 
     print(mon_rotor.passage_inverse_dans_rotor(11)) # chiffrage inverse de la lettre V

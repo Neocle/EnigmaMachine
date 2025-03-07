@@ -5,8 +5,8 @@
 # Python : Version 3.10
 #----------------------------------------------------
 # -*- coding: utf-8 -*-
-import classe_rotor as rtr
-import classe_reflecteur as rfl
+import modules.classe_rotor as rtr
+import modules.classe_reflecteur as rfl
 
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -121,9 +121,7 @@ class Enigma:
         return ALPHABET[nombre]
 
     def Decodagelettre(self, lettre):
-        print(self.GetLettreInitRotorGauche(), self.GetLettreInitRotorCentre(), self.GetLettreInitRotorDroite())
 
-        self.rotor_d.decalage_un_rang()
         if ALPHABET[self.rotor_d.poscur] == ROTORS[self.rotor_d.Get_num_rotor() - 1]["encoche"]:
             self.rotor_c.decalage_un_rang()
             if ALPHABET[self.rotor_c.poscur] == ROTORS[self.rotor_c.Get_num_rotor() - 1]["encoche"]:
@@ -132,26 +130,29 @@ class Enigma:
         lettre, valeur = self.val_apres_cablage_depart(self.lettre_en_nombre(lettre))
         print(lettre, valeur)
 
+        self.rotor_d.decalage_un_rang()
+
         lettre, valeur = self.rotor_d.passage_dans_rotor(valeur)
         print(lettre, valeur)
-        lettre, valeur = self.rotor_c.passage_dans_rotor(valeur)
+        lettre, valeur = self.rotor_c.passage_dans_rotor(valeur - self.rotor_d.poscur)
         print(lettre, valeur)
-        lettre, valeur = self.rotor_g.passage_dans_rotor(valeur)
-        print(lettre, valeur)
-
-        lettre, valeur = self.reflecteur.passage_dans_reflecteur(valeur)
+        lettre, valeur = self.rotor_g.passage_dans_rotor(valeur - self.rotor_c.poscur)
         print(lettre, valeur)
 
-        lettre, valeur = self.rotor_g.passage_inverse_dans_rotor(valeur)
+        lettre, valeur = self.reflecteur.passage_dans_reflecteur(valeur - self.rotor_g.poscur)
         print(lettre, valeur)
-        lettre, valeur = self.rotor_c.passage_inverse_dans_rotor(valeur)
+
+        lettre, valeur = self.rotor_g.passage_inverse_dans_rotor(valeur + self.rotor_g.poscur)
         print(lettre, valeur)
-        lettre, valeur = self.rotor_d.passage_inverse_dans_rotor(valeur)
+        lettre, valeur = self.rotor_c.passage_inverse_dans_rotor(valeur + self.rotor_c.poscur)
+        print(lettre, valeur)
+        lettre, valeur = self.rotor_d.passage_inverse_dans_rotor(valeur + self.rotor_d.poscur)
         print(lettre, valeur)
 
         lettre_decodee, lettre = self.val_apres_cablage_depart(valeur)
         print(lettre_decodee, lettre)
-
+        
+        print(self.GetLettreInitRotorGauche(), self.GetLettreInitRotorCentre(), self.GetLettreInitRotorDroite())
         return lettre_decodee
     
 

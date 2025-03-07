@@ -7,21 +7,72 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="decryption-container">
+        <div class="settings-panel">  
+            <h1>Settings</h1>  
+            <label for="rotor1">Left Rotor:</label>
+            <select id="rotor1">
+                <option value="1">Rotor I</option>
+                <option value="2">Rotor II</option>
+                <option value="3">Rotor III</option>
+                <option value="4">Rotor IV</option>
+                <option value="5">Rotor V</option>
+            </select>
+            <input type="text" id="start1" maxlength="1" placeholder="A" class="rotor-start">
+
+            <label for="rotor2">Center Rotor:</label>
+            <select id="rotor2">
+                <option value="1">Rotor I</option>
+                <option value="2">Rotor II</option>
+                <option value="3">Rotor III</option>
+                <option value="4">Rotor IV</option>
+                <option value="5">Rotor V</option>
+            </select>
+            <input type="text" id="start2" maxlength="1" placeholder="A" class="rotor-start">
+
+            <label for="rotor3">Right Rotor:</label>
+            <select id="rotor3">
+                <option value="1">Rotor I</option>
+                <option value="2">Rotor II</option>
+                <option value="3">Rotor III</option>
+                <option value="4">Rotor IV</option>
+                <option value="5">Rotor V</option>
+            </select>
+            <input type="text" id="start3" maxlength="1" placeholder="A" class="rotor-start">
+
+            <label for="reflector">Select Reflector:</label>
+            <select id="reflector">
+                <option value="1">UKW-B</option>
+                <option value="2">UKW-C</option>
+            </select>
+        </div>
+        <button class="apply-settings" onclick="applySettings()">Apply Settings</button>
+
+        <div class="fast-decryption">
+            <h1>Fast Decryption</h1>
+            <input type="text">
+        </div>
+        <div class="decryption-details">
+            <h1>Decryption Details</h1>
+            <input type="text">
+        </div>
+    </div>
+
     <div class="enigma">
         <h1>Enigma M3</h1>
         <div class="rotor-container">
             <div class="rotor">
-                <div class="label">A</div>
+                <div class="label" id="rotor1-label">A</div>
                 <div class="screw top"></div>
                 <div class="screw bottom"></div>
             </div>
             <div class="rotor">
-                <div class="label">A</div>
+                <div class="label" id="rotor2-label">A</div>
                 <div class="screw top"></div>
                 <div class="screw bottom"></div>
             </div>
             <div class="rotor">
-                <div class="label">A</div>
+                <div class="label" id="rotor3-label">A</div>
                 <div class="screw top"></div>
                 <div class="screw bottom"></div>
             </div>
